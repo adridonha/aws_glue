@@ -1,0 +1,482 @@
+[
+  {
+    "email": "empleado0001@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-26"
+  },
+  {
+    "email": "empleado0002@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-03-03"
+  },
+  {
+    "email": "empleado0003@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-17"
+  },
+  {
+    "email": "empleado0004@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-15"
+  },
+  {
+    "email": "empleado0005@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-20"
+  },
+  {
+    "email": "empleado0006@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-04"
+  },
+  {
+    "email": "empleado0007@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-11"
+  },
+  {
+    "email": "empleado0008@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-29"
+  },
+  {
+    "email": "empleado0009@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-04"
+  },
+  {
+    "email": "empleado0010@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-11"
+  },
+  {
+    "email": "empleado0011@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-03-08"
+  },
+  {
+    "email": "empleado0012@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-16"
+  },
+  {
+    "email": "empleado0013@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-25"
+  },
+  {
+    "email": "empleado0014@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-04"
+  },
+  {
+    "email": "empleado0015@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-04"
+  },
+  {
+    "email": "empleado0016@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-02-09"
+  },
+  {
+    "email": "empleado0017@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2025-12-30"
+  },
+  {
+    "email": "empleado0018@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2025-12-19"
+  },
+  {
+    "email": "empleado0019@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-03-09"
+  },
+  {
+    "email": "empleado0020@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-11"
+  },
+  {
+    "email": "empleado0021@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-31"
+  },
+  {
+    "email": "empleado0022@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2025-12-31"
+  },
+  {
+    "email": "empleado0023@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2025-12-31"
+  },
+  {
+    "email": "empleado0024@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-12"
+  },
+  {
+    "email": "empleado0025@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-07"
+  },
+  {
+    "email": "empleado0026@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-15"
+  },
+  {
+    "email": "empleado0027@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-01-02"
+  },
+  {
+    "email": "empleado0028@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-12"
+  },
+  {
+    "email": "empleado0029@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2025-12-26"
+  },
+  {
+    "email": "empleado0030@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-15"
+  },
+  {
+    "email": "empleado0031@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-24"
+  },
+  {
+    "email": "empleado0032@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-03-10"
+  },
+  {
+    "email": "empleado0033@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-03-06"
+  },
+  {
+    "email": "empleado0034@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-23"
+  },
+  {
+    "email": "empleado0035@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-03-10"
+  },
+  {
+    "email": "empleado0036@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-09"
+  },
+  {
+    "email": "empleado0037@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-16"
+  },
+  {
+    "email": "empleado0038@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-09"
+  },
+  {
+    "email": "empleado0039@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-19"
+  },
+  {
+    "email": "empleado0040@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2025-12-28"
+  },
+  {
+    "email": "empleado0041@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-20"
+  },
+  {
+    "email": "empleado0042@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-02-08"
+  },
+  {
+    "email": "empleado0043@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2025-12-24"
+  },
+  {
+    "email": "empleado0044@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-13"
+  },
+  {
+    "email": "empleado0045@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2025-12-26"
+  },
+  {
+    "email": "empleado0046@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2025-12-29"
+  },
+  {
+    "email": "empleado0047@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-13"
+  },
+  {
+    "email": "empleado0048@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2025-12-17"
+  },
+  {
+    "email": "empleado0049@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-09"
+  },
+  {
+    "email": "empleado0050@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-02-19"
+  },
+  {
+    "email": "empleado0051@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-13"
+  },
+  {
+    "email": "empleado0052@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-03-07"
+  },
+  {
+    "email": "empleado0053@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-03"
+  },
+  {
+    "email": "empleado0054@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-10"
+  },
+  {
+    "email": "empleado0055@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-01-16"
+  },
+  {
+    "email": "empleado0056@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2025-12-19"
+  },
+  {
+    "email": "empleado0057@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-21"
+  },
+  {
+    "email": "empleado0058@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-18"
+  },
+  {
+    "email": "empleado0059@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-14"
+  },
+  {
+    "email": "empleado0060@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-01"
+  },
+  {
+    "email": "empleado0061@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-06"
+  },
+  {
+    "email": "empleado0062@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-03-01"
+  },
+  {
+    "email": "empleado0063@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-01-29"
+  },
+  {
+    "email": "empleado0064@empresa-analitica.com",
+    "rendimiento": "Medio",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-28"
+  },
+  {
+    "email": "empleado0065@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-05"
+  },
+  {
+    "email": "empleado0066@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-10"
+  },
+  {
+    "email": "empleado0067@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-02-16"
+  },
+  {
+    "email": "empleado0068@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-02-28"
+  },
+  {
+    "email": "empleado0069@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-18"
+  },
+  {
+    "email": "empleado0070@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2025-12-16"
+  },
+  {
+    "email": "empleado0071@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-28"
+  },
+  {
+    "email": "empleado0072@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-03"
+  },
+  {
+    "email": "empleado0073@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Supera expectativas",
+    "fecha_ultima_evaluacion": "2026-01-12"
+  },
+  {
+    "email": "empleado0074@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2026-02-07"
+  },
+  {
+    "email": "empleado0075@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-19"
+  },
+  {
+    "email": "empleado0076@empresa-analitica.com",
+    "rendimiento": "Bajo",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-01-18"
+  },
+  {
+    "email": "empleado0077@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-01-04"
+  },
+  {
+    "email": "empleado0078@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Necesita mejorar",
+    "fecha_ultima_evaluacion": "2025-12-21"
+  },
+  {
+    "email": "empleado0079@empresa-analitica.com",
+    "rendimiento": "Alto",
+    "feedback_ultimo_mes": "Cumple expectativas",
+    "fecha_ultima_evaluacion": "2026-02-13"
+  },
+  {
+    "email": "empleado0080@empresa-analitica.com",
+    "rendimiento": "Muy Alto",
+    "feedback_ultimo_mes": "Excelente",
+    "fecha_ultima_evaluacion": "2026-02-03"
+  }
+]

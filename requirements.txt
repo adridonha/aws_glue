@@ -1,0 +1,4 @@
+# Generación de datos sintéticos
+pandas>=2.0.0
+faker>=20.0.0
+pymongo>=4.0.0  # opcional, para cargar en MongoDB Atlas

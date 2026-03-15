@@ -1,0 +1,83 @@
+nombre,email,departamento,puesto,sueldo,antigüedad
+Carlos García,empleado0001@empresa-analitica.com,RRHH,Técnico RRHH,25796,7
+Sara Sánchez,empleado0002@empresa-analitica.com,Finanzas,Contable,27613,15
+Miguel López,empleado0003@empresa-analitica.com,Ventas,Account Manager,30241,4
+Carlos Díaz,empleado0004@empresa-analitica.com,Operaciones,Jefe de Proyecto,58031,5
+María Moreno,empleado0005@empresa-analitica.com,RRHH,Responsable de Formación,35880,6
+Antonio García,empleado0006@empresa-analitica.com,Operaciones,Jefe de Proyecto,48148,11
+Ana Martínez,empleado0007@empresa-analitica.com,Marketing,Community Manager,51588,3
+Laura Sánchez,empleado0008@empresa-analitica.com,IT,Desarrollador,26196,10
+Paula Moreno,empleado0009@empresa-analitica.com,Ventas,Account Manager,58301,7
+Ana Díaz,empleado0010@empresa-analitica.com,Finanzas,Contable,22471,2
+Laura Díaz,empleado0011@empresa-analitica.com,Operaciones,Analista de Procesos,25858,7
+Antonio Sánchez,empleado0012@empresa-analitica.com,Ventas,Comercial,43654,2
+Lucía Moreno,empleado0013@empresa-analitica.com,Finanzas,Contable,40250,15
+Sara García,empleado0014@empresa-analitica.com,IT,Arquitecto de Software,30671,15
+Pablo Rodríguez,empleado0015@empresa-analitica.com,IT,DevOps,48677,6
+Carmen Pérez,empleado0016@empresa-analitica.com,Ventas,Comercial,50249,11
+Elena Sánchez,empleado0017@empresa-analitica.com,Marketing,Analista Digital,52606,1
+Carmen Martínez,empleado0018@empresa-analitica.com,Operaciones,Analista de Procesos,64348,3
+María Rodríguez,empleado0019@empresa-analitica.com,Ventas,Jefe de Ventas,44236,3
+Carlos González,empleado0020@empresa-analitica.com,IT,Desarrollador,34465,14
+David Moreno,empleado0021@empresa-analitica.com,IT,DevOps,34025,8
+Sara García,empleado0022@empresa-analitica.com,Marketing,Content Manager,26940,14
+Lucía Díaz,empleado0023@empresa-analitica.com,Finanzas,Contable,25315,0
+Carlos Rodríguez,empleado0024@empresa-analitica.com,Ventas,Comercial,32899,13
+María Díaz,empleado0025@empresa-analitica.com,Marketing,Analista Digital,36008,12
+Jorge Moreno,empleado0026@empresa-analitica.com,Ventas,Comercial,46836,0
+David Moreno,empleado0027@empresa-analitica.com,Marketing,Analista Digital,51819,9
+Laura Martínez,empleado0028@empresa-analitica.com,Marketing,Community Manager,58422,15
+Luis Sánchez,empleado0029@empresa-analitica.com,IT,Desarrollador,41445,6
+Jorge Martínez,empleado0030@empresa-analitica.com,Ventas,Account Manager,57533,1
+Miguel Martínez,empleado0031@empresa-analitica.com,Operaciones,Jefe de Proyecto,25746,1
+Isabel Pérez,empleado0032@empresa-analitica.com,Finanzas,Analista Financiero,54954,5
+Lucía González,empleado0033@empresa-analitica.com,Ventas,Account Manager,27250,5
+Pablo González,empleado0034@empresa-analitica.com,Ventas,Account Manager,26453,7
+David Sánchez,empleado0035@empresa-analitica.com,Marketing,Content Manager,59334,7
+Sara Martínez,empleado0036@empresa-analitica.com,Finanzas,Controller,24604,2
+Daniel López,empleado0037@empresa-analitica.com,Marketing,Community Manager,60251,10
+Javier Sánchez,empleado0038@empresa-analitica.com,RRHH,Técnico RRHH,42590,7
+Pablo Fernández,empleado0039@empresa-analitica.com,RRHH,Responsable de Formación,30577,9
+Isabel Pérez,empleado0040@empresa-analitica.com,Marketing,Analista Digital,26754,0
+Javier Sánchez,empleado0041@empresa-analitica.com,Marketing,Community Manager,58896,3
+Carmen García,empleado0042@empresa-analitica.com,Ventas,Account Manager,35969,8
+Miguel García,empleado0043@empresa-analitica.com,IT,DevOps,26508,7
+Carmen Rodríguez,empleado0044@empresa-analitica.com,RRHH,Responsable de Formación,32338,14
+Sara Martínez,empleado0045@empresa-analitica.com,Finanzas,Controller,41825,0
+Laura Moreno,empleado0046@empresa-analitica.com,Operaciones,Analista de Procesos,41620,3
+Carmen Sánchez,empleado0047@empresa-analitica.com,IT,DevOps,29564,3
+Francisco Rodríguez,empleado0048@empresa-analitica.com,Operaciones,Analista de Procesos,32187,8
+Lucía López,empleado0049@empresa-analitica.com,RRHH,Técnico RRHH,44471,6
+Sara López,empleado0050@empresa-analitica.com,Operaciones,Analista de Procesos,39300,15
+Miguel Díaz,empleado0051@empresa-analitica.com,RRHH,Técnico RRHH,28048,13
+Javier Pérez,empleado0052@empresa-analitica.com,RRHH,Técnico RRHH,22232,10
+Marta Rodríguez,empleado0053@empresa-analitica.com,IT,Arquitecto de Software,39167,5
+Marta Rodríguez,empleado0054@empresa-analitica.com,Operaciones,Jefe de Proyecto,58154,13
+David Sánchez,empleado0055@empresa-analitica.com,Finanzas,Contable,29331,2
+Elena Díaz,empleado0056@empresa-analitica.com,Operaciones,Coordinador,57755,1
+Francisco Martínez,empleado0057@empresa-analitica.com,RRHH,Técnico RRHH,50166,4
+Luis Martínez,empleado0058@empresa-analitica.com,Ventas,Jefe de Ventas,45897,1
+Elena López,empleado0059@empresa-analitica.com,RRHH,Técnico RRHH,38353,3
+Antonio Moreno,empleado0060@empresa-analitica.com,RRHH,Responsable de Formación,62675,4
+María Rodríguez,empleado0061@empresa-analitica.com,IT,Desarrollador,33603,13
+Isabel Moreno,empleado0062@empresa-analitica.com,Ventas,Comercial,43770,13
+Lucía Díaz,empleado0063@empresa-analitica.com,Operaciones,Analista de Procesos,38263,8
+Sara Díaz,empleado0064@empresa-analitica.com,IT,Arquitecto de Software,29084,12
+Ana Martínez,empleado0065@empresa-analitica.com,Ventas,Jefe de Ventas,36577,6
+Javier Pérez,empleado0066@empresa-analitica.com,Marketing,Analista Digital,42000,7
+Carmen Martínez,empleado0067@empresa-analitica.com,IT,Desarrollador,34656,12
+Jorge Rodríguez,empleado0068@empresa-analitica.com,RRHH,Responsable de Formación,26549,8
+Pablo Fernández,empleado0069@empresa-analitica.com,RRHH,Responsable de Formación,57141,10
+Ana Pérez,empleado0070@empresa-analitica.com,Ventas,Comercial,39118,5
+Paula López,empleado0071@empresa-analitica.com,Finanzas,Analista Financiero,24507,3
+Paula Martínez,empleado0072@empresa-analitica.com,Finanzas,Analista Financiero,44654,10
+Jorge Díaz,empleado0073@empresa-analitica.com,Marketing,Community Manager,55516,3
+Daniel Sánchez,empleado0074@empresa-analitica.com,Marketing,Community Manager,34457,8
+Elena González,empleado0075@empresa-analitica.com,Ventas,Account Manager,50577,0
+Pablo Díaz,empleado0076@empresa-analitica.com,Finanzas,Controller,34912,11
+Paula García,empleado0077@empresa-analitica.com,Marketing,Content Manager,43639,10
+Daniel González,empleado0078@empresa-analitica.com,Operaciones,Coordinador,41681,9
+Francisco García,empleado0079@empresa-analitica.com,Operaciones,Jefe de Proyecto,43376,12
+Carlos González,empleado0080@empresa-analitica.com,Operaciones,Jefe de Proyecto,58333,4
+Duplicado Test,empleado0001@empresa-analitica.com,IT,Desarrollador,35000,2
+,incompleto@empresa.com,Ventas,,0,0
