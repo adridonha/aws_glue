@@ -88,6 +88,8 @@ Lo usarás:
 - En los **Crawlers** (campo *IAM role*).
 - En el **Job** de Glue (campo *IAM Role*).
 
+> **Nota (entorno Vocareum / labs)**: si tu usuario **no puede crear roles** y ya existen roles como `labrole`, `vocareum` o `voclabs`, usa **`labrole`** tanto en los Crawlers como en los Jobs de Glue. Ese rol suele venir preconfigurado con los permisos necesarios para los laboratorios.
+
 Para el PDF:
 - Captura de la pantalla de IAM donde se ve el rol creado.
 
@@ -119,19 +121,54 @@ Para el PDF:
 
 ---
 
-## Paso 4 (AWS). RDS: tabla + carga + catálogo
+## Paso 4 (AWS). RDS/MariaDB: tabla + carga + catálogo
 
-### 4A) Crear/usar una instancia RDS
-- Motor: PostgreSQL o MySQL.
-- Debes poder conectarte (cliente SQL).
+### 4A) Crear/usar una instancia RDS (MariaDB)
+- Motor recomendado para la práctica: **MariaDB** en RDS.
+- Debes poder conectarte desde tu máquina con **DBeaver** (o cliente SQL equivalente).
 
-### 4B) Crear tabla y cargar datos
-Tabla requerida:
+### 4B) Crear tabla y cargar datos con DBeaver
+Tabla requerida (en la base de datos `empresa`):
 - `email`, `proyecto`, `horas_trabajadas`, `rol`
 
-Carga recomendada:
-- Crea la tabla (puedes usar como referencia `data/rds/proyectos_empleados.sql`).
-- Importa `data/rds/proyectos_empleados.csv` (COPY/LOAD DATA/GUI).
+**Pasos en DBeaver (resumen):**
+
+1) **Crear conexión**
+   - Tipo de conexión: **MariaDB**.
+   - Host: endpoint del RDS (ej. `mi-rds.mariadb.xxxxx.us-east-1.rds.amazonaws.com`).
+   - Puerto: `3306`.
+   - Database: `empresa` (o la que hayas definido).
+   - Usuario/contraseña: los que configuraste al crear la instancia.
+
+2) **Crear la tabla**
+   - En DBeaver, abre un **SQL Editor** sobre la DB `empresa`.
+   - Ejecuta:
+     ```sql
+     CREATE TABLE IF NOT EXISTS proyectos_empleados (
+       email VARCHAR(255) NOT NULL,
+       proyecto VARCHAR(100) NOT NULL,
+       horas_trabajadas INT NOT NULL,
+       rol VARCHAR(100) NOT NULL
+     );
+     ```
+
+3) **Importar el CSV generado**
+   - Botón derecho sobre la tabla `proyectos_empleados` → **Import Data**.
+   - Fuente: **CSV** → selecciona el archivo `data/rds/proyectos_empleados.csv` de este repositorio.
+   - Mapea columnas:
+     - `email` → `email`
+     - `proyecto` → `proyecto`
+     - `horas_trabajadas` → `horas_trabajadas`
+     - `rol` → `rol`
+   - Siguiente → Finish. DBeaver insertará todas las filas.
+   - Comprueba con:
+     ```sql
+     SELECT * FROM proyectos_empleados LIMIT 10;
+     ```
+
+Para el PDF:
+- Captura de DBeaver con la conexión a RDS/MariaDB.
+- Captura de la tabla `proyectos_empleados` con algunas filas cargadas.
 
 ### 4C) Conexión JDBC + Crawler en Glue
 1) Glue → **Connections** → JDBC (RDS)
