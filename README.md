@@ -131,7 +131,7 @@ Para el PDF:
 Tabla requerida (en la base de datos `empresa`):
 - `email`, `proyecto`, `horas_trabajadas`, `rol`
 
-**Pasos en DBeaver (resumen):**
+**Pasos en DBeaver:**
 
 1) **Crear conexión**
    - Tipo de conexión: **MariaDB**.
