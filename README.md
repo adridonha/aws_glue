@@ -1,65 +1,233 @@
-# Repositorio analítico de empleados – ETL con AWS Glue
+# Guía paso a paso (entrega) – AWS Glue + Athena
 
-Pipeline ETL que integra datos de empleados desde **S3 (CSV)**, **RDS** y **MongoDB Atlas**, con AWS Glue y consultas en Amazon Athena.
+Esta guía es “lo que tienes que hacer tú” para completar la práctica: **crear las fuentes**, **catalogarlas con Glue**, **ejecutar el Job ETL**, y **consultar el resultado con Athena**, dejando todo listo para el **PDF** con capturas.
 
-## Estructura del proyecto
+---
+
+## Qué hay en este repo (y qué vas a usar)
 
 ```
 aws_glue/
+├── .env_plantilla                 # Plantilla .env (NO subir al repo)
+├── .gitignore
 ├── data/
-│   ├── generar_datos_sinteticos.py   # Genera CSV (S3), RDS y MongoDB
-│   ├── s3/
-│   │   └── empleados.csv
-│   ├── rds/
-│   │   ├── proyectos_empleados.csv
-│   │   └── proyectos_empleados.sql
-│   └── mongodb/
-│       └── evaluaciones.json
-├── glue/
-│   └── etl_empleados_analitico.py    # Script del Glue ETL Job
-├── docs/
-│   └── INFORME_ETL_EMPLEADOS.md      # Informe para entregar (exportar a PDF)
-├── athena/
-│   └── ddl_empleados_final.sql       # DDL para tabla en Athena
-├── requirements.txt
-└── README.md
+│   ├── generar_datos_sinteticos.py # Genera datos: S3 CSV, RDS CSV/SQL, MongoDB JSON
+│   ├── s3/empleados.csv
+│   ├── rds/proyectos_empleados.csv
+│   ├── rds/proyectos_empleados.sql
+│   └── mongodb/evaluaciones.json
+├── glue/etl_empleados_analitico.py # Script del Job ETL en Glue
+├── athena/ddl_empleados_final.sql  # DDL para tabla final en Athena
+└── docs/INFORME_ETL_EMPLEADOS.md   # Informe base para exportar a PDF (con placeholders)
 ```
 
-## Uso rápido
+---
 
-### 1. Generar datos sintéticos
+## Antes de empezar (credenciales y región)
+
+- **AWS**: Glue no usa `.env`. El Job corre con **IAM Role**.  
+  El `.env` te sirve solo para cosas locales (AWS CLI, scripts, etc.).
+
+1) Copia plantilla y rellena:
+
+```bash
+cp .env_plantilla .env
+```
+
+2) Edita `.env` y completa:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_DEFAULT_REGION` (ej. `eu-west-1`)
+
+---
+
+## Paso 0 (local). Generar datos sintéticos
 
 ```bash
 pip install -r requirements.txt
 python data/generar_datos_sinteticos.py
 ```
 
-Se generan:
-- `data/s3/empleados.csv` → subir a `s3://TU_BUCKET/raw/empleados/`
-- `data/rds/` → cargar en la tabla RDS `proyectos_empleados`
-- `data/mongodb/evaluaciones.json` → importar en la colección MongoDB
+Se generan 3 fuentes con la misma clave `email` para el join:
+- **S3**: `data/s3/empleados.csv`
+- **RDS**: `data/rds/proyectos_empleados.csv` (y `proyectos_empleados.sql` de apoyo)
+- **MongoDB**: `data/mongodb/evaluaciones.json`
 
-### 2. En AWS
+Para el PDF:
+- Pega 3–5 filas de ejemplo de cada fuente, o captura.
 
-1. **S3:** Crear bucket, subir `empleados.csv` a `raw/empleados/`.
-2. **Glue:** Crear base de datos `empresa_db`, Crawlers para S3 y RDS, conexión MongoDB, Job con el script en `glue/etl_empleados_analitico.py` y los parámetros indicados en el informe.
-3. **Athena:** Crear tabla sobre la ruta de salida del Job (ver `athena/ddl_empleados_final.sql`) o ejecutar un Crawler sobre esa ruta.
+---
 
-### 3. Documento PDF
+## Paso 1 (AWS). Crear bucket y estructura en S3
 
-- Abrir `docs/INFORME_ETL_EMPLEADOS.md` en un editor o en [Mermaid Live](https://mermaid.live) para el diagrama.
-- Añadir las capturas de pantalla en los lugares indicados.
-- Exportar a PDF (p. ej. desde VS Code con extensión Markdown PDF, o desde Word/LibreOffice pegando el contenido).
+1) En S3 crea un bucket (ejemplo): `empresa-analitica-datos-<tu_nombre>`
+2) Estructura de carpetas:
+- `raw/empleados/`
+- `analitica/empleados_final/`
+3) Sube `data/s3/empleados.csv` a:
+- `s3://TU_BUCKET/raw/empleados/empleados.csv`
 
-## Parámetros del Job Glue
+Para el PDF:
+- Captura del bucket mostrando el CSV en esa ruta.
 
-| Parámetro | Ejemplo |
-|-----------|---------|
-| `s3_database` | empresa_db |
-| `s3_table_empleados` | empleados |
-| `rds_database` | empresa_db |
-| `rds_table` | proyectos_empleados |
-| `mongodb_connection` | nombre de la conexión Glue a MongoDB |
-| `mongodb_database` | empresa |
-| `mongodb_collection` | evaluaciones |
-| `output_path` | s3://TU_BUCKET/analitica/empleados_final/ |
+---
+
+## Paso 2 (AWS). Crear la base de datos en Glue Data Catalog
+
+Glue → **Data Catalog → Databases → Add database**  
+- Nombre: **`empresa_db`**
+
+Para el PDF:
+- Captura donde se vea `empresa_db`.
+
+---
+
+## Paso 3 (AWS). Crawler para S3 (tabla `empleados`)
+
+Glue:
+1) **Crawlers → Create crawler**
+2) Data source: S3 → `s3://TU_BUCKET/raw/empleados/`
+3) Output: Database `empresa_db`
+4) Ejecuta el crawler
+5) Verifica la tabla (ej. `empleados`) con columnas:
+- `nombre`, `email`, `departamento`, `puesto`, `sueldo`, `antigüedad`
+
+Para el PDF:
+- Captura del crawler (run “Succeeded”).
+- Captura de la tabla en Data Catalog con columnas.
+
+---
+
+## Paso 4 (AWS). RDS: tabla + carga + catálogo
+
+### 4A) Crear/usar una instancia RDS
+- Motor: PostgreSQL o MySQL.
+- Debes poder conectarte (cliente SQL).
+
+### 4B) Crear tabla y cargar datos
+Tabla requerida:
+- `email`, `proyecto`, `horas_trabajadas`, `rol`
+
+Carga recomendada:
+- Crea la tabla (puedes usar como referencia `data/rds/proyectos_empleados.sql`).
+- Importa `data/rds/proyectos_empleados.csv` (COPY/LOAD DATA/GUI).
+
+### 4C) Conexión JDBC + Crawler en Glue
+1) Glue → **Connections** → JDBC (RDS)
+2) (Si está en VPC) configura VPC/Subnet/SG para que Glue llegue al RDS
+3) Crawler usando esa conexión, output a `empresa_db`
+4) Ejecuta y verifica la tabla (ej. `proyectos_empleados`) con columnas correctas
+
+Para el PDF:
+- Captura de la Connection JDBC.
+- Captura del crawler + tabla catalogada.
+
+---
+
+## Paso 5 (AWS). MongoDB Atlas: importar + conexión en Glue
+
+### 5A) En Atlas: DB/colección e import JSON
+1) Crea DB (ej. `empresa`) y colección (ej. `evaluaciones`)
+2) Importa `data/mongodb/evaluaciones.json`
+
+Campos esperados:
+- `email`, `rendimiento`, `feedback_ultimo_mes`, `fecha_ultima_evaluacion`
+
+### 5B) En Glue: conexión MongoDB
+1) Glue → **Connections** → MongoDB
+2) Usa el connection string de Atlas
+3) Asegura red (allowlist IP / peering, según tu caso)
+
+Para el PDF:
+- Captura de la conexión MongoDB en Glue.
+- (Opcional) Si haces crawler, captura del crawler + tabla.
+
+---
+
+## Paso 6 (AWS). Crear el ETL Job en Glue (Spark)
+
+1) Glue Studio → **Jobs → Create job**
+2) Tipo: Spark (script)
+3) Pega el script: `glue/etl_empleados_analitico.py`
+4) IAM Role con permisos:
+   - S3 (leer `raw/`, escribir `analitica/`)
+   - Glue Data Catalog
+   - RDS (red VPC/SG si aplica)
+   - MongoDB (vía la conexión)
+5) **Job parameters**:
+
+- `--s3_database` = `empresa_db`
+- `--s3_table_empleados` = `empleados`
+- `--rds_database` = `empresa_db`
+- `--rds_table` = `proyectos_empleados`
+- `--mongodb_connection` = `NOMBRE_CONEXION_MONGO`
+- `--mongodb_database` = `empresa`
+- `--mongodb_collection` = `evaluaciones`
+- `--output_path` = `s3://TU_BUCKET/analitica/empleados_final/`
+
+6) Ejecuta el Job y valida estado **Succeeded**
+
+Para el PDF:
+- Captura del Job (script + parámetros).
+- Captura del run “Succeeded”.
+
+---
+
+## Paso 7–9 (ETL). Qué hace el script (para justificar en la memoria)
+
+En `glue/etl_empleados_analitico.py`:
+- **Limpieza**:
+  - `dropDuplicates([\"email\"])`
+  - elimina `email` nulo/vacío
+  - outliers: sueldo 15k–120k; antigüedad 0–30; horas 0–250
+- **Filtro**: sueldo > 0
+- **Join**: INNER de las 3 fuentes por `email`
+- **Nuevas columnas**:
+  - `nivel_rendimiento` (= `rendimiento`)
+  - `categoria_sueldo` (Bajo/Medio/Alto)
+- **Salida**: Parquet en S3 particionado por `departamento`
+
+Para el PDF:
+- Captura del fragmento del código con limpieza+filtro+join+columnas derivadas.
+
+---
+
+## Paso 10 (AWS). Athena: tabla final + particiones + consultas
+
+### Opción A (directo con DDL)
+1) Athena → Query editor
+2) Ejecuta `athena/ddl_empleados_final.sql` (cambia `TU_BUCKET`)
+3) Carga particiones:
+
+```sql
+MSCK REPAIR TABLE empresa_db.empleados_final;
+```
+
+### Opción B (Crawler sobre la salida)
+1) Crawler apuntando a `s3://TU_BUCKET/analitica/empleados_final/`
+2) Output a `empresa_db`
+3) Ejecuta y consulta en Athena
+
+Para el PDF:
+- Captura de la tabla y de 2–4 consultas con resultados.
+
+---
+
+## Checklist de capturas (rúbrica)
+
+- S3 bucket + `raw/empleados/empleados.csv`
+- Glue Database `empresa_db`
+- Crawler S3 + tabla `empleados` con columnas
+- Connection JDBC RDS + crawler + tabla `proyectos_empleados`
+- Connection MongoDB (y crawler/tabla si aplica)
+- Glue Job (script+parámetros) + Run “Succeeded”
+- S3 salida `analitica/empleados_final/` con carpetas `departamento=...`
+- Athena: tabla + `MSCK REPAIR` + resultados de consultas
+
+---
+
+## PDF (memoria)
+
+Usa `docs/INFORME_ETL_EMPLEADOS.md`:
+- Inserta las capturas en los placeholders
+- Exporta a PDF (VS Code “Markdown PDF” o copiar a Word/LibreOffice)
