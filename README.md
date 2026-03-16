@@ -72,6 +72,27 @@ Para el PDF:
 
 ---
 
+## Paso 1.1 (AWS). Crear IAM Role para Glue
+
+Antes de usar Crawlers o Jobs, crea un rol de servicio para Glue:
+
+1) IAM → **Roles → Create role**
+2) **Trusted entity**:
+   - AWS service → elige **Glue**
+3) **Permissions** (mínimo para la práctica):
+   - `AWSGlueServiceRole`
+   - `AmazonS3FullAccess` (o una política limitada a tu bucket)
+4) Nombre del rol: por ejemplo `AWSGlueServiceRole-empresa-analitica`
+
+Lo usarás:
+- En los **Crawlers** (campo *IAM role*).
+- En el **Job** de Glue (campo *IAM Role*).
+
+Para el PDF:
+- Captura de la pantalla de IAM donde se ve el rol creado.
+
+---
+
 ## Paso 2 (AWS). Crear la base de datos en Glue Data Catalog
 
 Glue → **Data Catalog → Databases → Add database**  
