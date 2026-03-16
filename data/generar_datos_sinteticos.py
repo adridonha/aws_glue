@@ -10,6 +10,7 @@ import json
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
+from faker import Faker
 
 # Configuración
 NUM_EMPLEADOS = 80
@@ -31,6 +32,8 @@ ROLES = ["Desarrollador", "Analista", "Líder técnico", "Consultor", "Soporte"]
 RENDIMIENTO_VALORES = ["Bajo", "Medio", "Alto", "Muy Alto"]
 FEEDBACK_OPCIONES = ["Necesita mejorar", "Cumple expectativas", "Supera expectativas", "Excelente"]
 
+faker = Faker("es_ES")
+
 
 def generar_emails(n: int) -> list[str]:
     """Genera n emails únicos sintéticos."""
@@ -40,11 +43,8 @@ def generar_emails(n: int) -> list[str]:
 
 
 def generar_nombres(n: int) -> list[str]:
-    """Genera n nombres sintéticos (nombre apellido)."""
-    nombres = ["Ana", "Luis", "María", "Carlos", "Elena", "Pablo", "Laura", "Miguel", "Sara", "Jorge",
-               "Carmen", "David", "Isabel", "Antonio", "Lucía", "Francisco", "Paula", "Javier", "Marta", "Daniel"]
-    apellidos = ["García", "Martínez", "López", "Sánchez", "Pérez", "González", "Rodríguez", "Fernández", "Díaz", "Moreno"]
-    return [f"{random.choice(nombres)} {random.choice(apellidos)}" for _ in range(n)]
+    """Genera n nombres sintéticos (nombre + apellidos) usando Faker."""
+    return [faker.name() for _ in range(n)]
 
 
 def generar_csv_s3(emails: list, nombres: list) -> Path:
@@ -121,11 +121,15 @@ def generar_mongodb(emails: list) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     docs = []
     for email in emails:
-        fecha = (datetime.now() - timedelta(days=random.randint(5, 90))).strftime("%Y-%m-%d")
+        # Fecha de evaluación aleatoria en los últimos 3 meses
+        fecha = faker.date_between(start_date="-90d", end_date="-5d").strftime("%Y-%m-%d")
+        # Usamos Faker para generar una frase corta y luego la mapeamos a categorías de feedback definidas
+        feedback_texto = faker.sentence(nb_words=4)
+        feedback_categoria = random.choice(FEEDBACK_OPCIONES)
         docs.append({
             "email": email,
             "rendimiento": random.choice(RENDIMIENTO_VALORES),
-            "feedback_ultimo_mes": random.choice(FEEDBACK_OPCIONES),
+            "feedback_ultimo_mes": f"{feedback_categoria}. {feedback_texto}",
             "fecha_ultima_evaluacion": fecha,
         })
     with open(path, "w", encoding="utf-8") as f:
@@ -136,6 +140,7 @@ def generar_mongodb(emails: list) -> Path:
 
 def main():
     random.seed(42)
+    Faker.seed(42)
     emails = generar_emails(NUM_EMPLEADOS)
     nombres = generar_nombres(NUM_EMPLEADOS)
     generar_csv_s3(emails, nombres)
