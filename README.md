@@ -1,14 +1,12 @@
-# Guía paso a paso (entrega) – AWS Glue + Athena
-
-Esta guía es “lo que tienes que hacer tú” para completar la práctica: **crear las fuentes**, **catalogarlas con Glue**, **ejecutar el Job ETL**, y **consultar el resultado con Athena**, dejando todo listo para el **PDF** con capturas.
+# AWS Glue + Athena
 
 ---
 
-## Qué hay en este repo (y qué vas a usar)
+## Qué hay en este repo
 
 ```
 aws_glue/
-├── .env_plantilla                 # Plantilla .env (NO subir al repo)
+├── .env_plantilla                 # Plantilla .env
 ├── .gitignore
 ├── data/
 │   ├── generar_datos_sinteticos.py # Genera datos: S3 CSV, RDS CSV/SQL, MongoDB JSON
@@ -18,7 +16,7 @@ aws_glue/
 │   └── mongodb/evaluaciones.json
 ├── glue/etl_empleados_analitico.py # Script del Job ETL en Glue
 ├── athena/ddl_empleados_final.sql  # DDL para tabla final en Athena
-└── docs/INFORME_ETL_EMPLEADOS.md   # Informe base para exportar a PDF (con placeholders)
+└── docs/INFORME_ETL_EMPLEADOS.md   # Informe base para exportar a PDF
 ```
 
 ---
@@ -53,9 +51,6 @@ Se generan 3 fuentes con la misma clave `email` para el join:
 - **RDS**: `data/rds/proyectos_empleados.csv` (y `proyectos_empleados.sql` de apoyo)
 - **MongoDB**: `data/mongodb/evaluaciones.json`
 
-Para el PDF:
-- Pega 3–5 filas de ejemplo de cada fuente, o captura.
-
 ---
 
 ## Paso 1 (AWS). Crear bucket y estructura en S3
@@ -67,31 +62,7 @@ Para el PDF:
 3) Sube `data/s3/empleados.csv` a:
 - `s3://TU_BUCKET/raw/empleados/empleados.csv`
 
-Para el PDF:
-- Captura del bucket mostrando el CSV en esa ruta.
-
----
-
-## Paso 1.1 (AWS). Crear IAM Role para Glue
-
-Antes de usar Crawlers o Jobs, crea un rol de servicio para Glue:
-
-1) IAM → **Roles → Create role**
-2) **Trusted entity**:
-   - AWS service → elige **Glue**
-3) **Permissions** (mínimo para la práctica):
-   - `AWSGlueServiceRole`
-   - `AmazonS3FullAccess` (o una política limitada a tu bucket)
-4) Nombre del rol: por ejemplo `AWSGlueServiceRole-empresa-analitica`
-
-Lo usarás:
-- En los **Crawlers** (campo *IAM role*).
-- En el **Job** de Glue (campo *IAM Role*).
-
-> **Nota (entorno Vocareum / labs)**: si tu usuario **no puede crear roles** y ya existen roles como `labrole`, `vocareum` o `voclabs`, usa **`labrole`** tanto en los Crawlers como en los Jobs de Glue. Ese rol suele venir preconfigurado con los permisos necesarios para los laboratorios.
-
-Para el PDF:
-- Captura de la pantalla de IAM donde se ve el rol creado.
+![Bucket S3 y CSV empleados](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2011.59.34.png)
 
 ---
 
@@ -100,8 +71,7 @@ Para el PDF:
 Glue → **Data Catalog → Databases → Add database**  
 - Nombre: **`empresa_db`**
 
-Para el PDF:
-- Captura donde se vea `empresa_db`.
+![Base de datos empresa_db en Glue](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.00.58.png)
 
 ---
 
@@ -115,9 +85,9 @@ Glue:
 5) Verifica la tabla (ej. `empleados`) con columnas:
 - `nombre`, `email`, `departamento`, `puesto`, `sueldo`, `antigüedad`
 
-Para el PDF:
-- Captura del crawler (run “Succeeded”).
-- Captura de la tabla en Data Catalog con columnas.
+![Crawler S3](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.15.09.png)
+
+![Tabla empleados en Data Catalog](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.17.21.png)
 
 ---
 
@@ -140,6 +110,8 @@ Tabla requerida (en la base de datos `empresa`):
    - Database: `empresa` (o la que hayas definido).
    - Usuario/contraseña: los que configuraste al crear la instancia.
 
+   ![Conexión DBeaver a MariaDB](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2022.53.58.png)
+
 2) **Crear la tabla**
    - En DBeaver, abre un **SQL Editor** sobre la DB `empresa`.
    - Ejecuta:
@@ -151,6 +123,8 @@ Tabla requerida (en la base de datos `empresa`):
        rol VARCHAR(100) NOT NULL
      );
      ```
+
+![Tabla proyectos_empleados creada](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.02.05.png)
 
 3) **Importar el CSV generado**
    - Botón derecho sobre la tabla `proyectos_empleados` → **Import Data**.
@@ -166,9 +140,9 @@ Tabla requerida (en la base de datos `empresa`):
      SELECT * FROM proyectos_empleados LIMIT 10;
      ```
 
-Para el PDF:
-- Captura de DBeaver con la conexión a RDS/MariaDB.
-- Captura de la tabla `proyectos_empleados` con algunas filas cargadas.
+![Import Data CSV](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.04.31.png)
+
+![Datos cargados en proyectos_empleados](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.05.47.png)
 
 ### 4C) Conexión JDBC + Crawler en Glue
 1) Glue → **Connections** → JDBC (RDS)
