@@ -133,8 +133,14 @@ Tabla requerida (en la base de datos `database-mariadb`):
 ## Paso 5 (AWS). MongoDB Atlas: importar + conexión en Glue
 
 ### 5A) En Atlas: DB/colección e import JSON
-1) Crea DB (ej. `empresa`) y colección (ej. `evaluaciones`)
-2) Importa `data/mongodb/evaluaciones.json`
+1) Creamos el cluster `awsCluster`
+2) Importamos `data/mongodb/evaluaciones.json`
+
+![Configuración inicial](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%201.55.41.png)
+
+![Proceso de importación](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%202.03.56.png)
+
+![Verificación final](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%202.04.55.png)
 
 Campos esperados:
 - `email`, `rendimiento`, `feedback_ultimo_mes`, `fecha_ultima_evaluacion`
