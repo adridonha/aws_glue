@@ -40,10 +40,13 @@ Se generan 3 fuentes con la misma clave `email` para el join:
 2) Estructura de carpetas:
 - `raw/empleados/`
 - `analitica/empleados_final/`
+
+![Estructura de carpetas](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%201.03.11.png)
+
 3) Subimos `data/s3/empleados.csv` a:
 - `s3://empresa-analitica-datos/raw/empleados/empleados.csv`
 
-![Bucket S3 y CSV empleados](/Users/adrian/Desktop/IABD/aws_glue/capturasReadme/Captura de pantalla 2026-03-18 a las 1.03.11.png)
+![Bucket S3 y CSV empleados](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2011.59.34.png)
 
 ---
 
@@ -52,7 +55,7 @@ Se generan 3 fuentes con la misma clave `email` para el join:
 Glue → **Data Catalog → Databases → Add database**  
 - Nombre: **`empresa_db`**
 
-![Base de datos empresa_db en Glue](capturasReadme/Captura de pantalla 2026-03-16 a las 12.00.58.png)
+![Base de datos empresa_db en Glue](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.00.58.png)
 
 ---
 
@@ -60,26 +63,28 @@ Glue → **Data Catalog → Databases → Add database**
 
 Glue:
 1) **Crawlers → Create crawler**
-2) Data source: S3 → `s3://TU_BUCKET/raw/empleados/`
+2) Data source: S3 → `s3://empresa-analitica-datos/raw/empleados/`
 3) Output: Database `empresa_db`
-4) Ejecuta el crawler
-5) Verifica la tabla (ej. `empleados`) con columnas:
+4) Ejecutamos el crawler
+5) Verificamos la tabla (ej. `empleados`) con columnas:
 - `nombre`, `email`, `departamento`, `puesto`, `sueldo`, `antigüedad`
 
-![Crawler S3](capturasReadme/Captura de pantalla 2026-03-16 a las 12.15.09.png)
+![Crawler S3](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.15.09.png)
 
-![Tabla empleados en Data Catalog](capturasReadme/Captura de pantalla 2026-03-16 a las 12.17.21.png)
+![Tabla empleados en Data Catalog](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.17.21.png)
 
 ---
 
 ## Paso 4 (AWS). RDS/MariaDB: tabla + carga + catálogo
 
-### 4A) Crear/usar una instancia RDS (MariaDB)
-- Motor recomendado para la práctica: **MariaDB** en RDS.
-- Debes poder conectarte desde tu máquina con **DBeaver** (o cliente SQL equivalente).
+### 4A) Creamos una base de datos RDS (MariaDB)
+- Motor recomendado: **MariaDB** en RDS.
+- Debemos poder conectarnos desde nuestra máquina con **DBeaver** (o cliente SQL equivalente).
+
+![Creación RDS](capturasReadme/Captura de pantalla 2026-03-18 a las 1.17.56.png)
 
 ### 4B) Crear tabla y cargar datos con DBeaver
-Tabla requerida (en la base de datos `empresa`):
+Tabla requerida (en la base de datos `database-mariadb`):
 - `email`, `proyecto`, `horas_trabajadas`, `rol`
 
 **Pasos en DBeaver:**
@@ -88,14 +93,14 @@ Tabla requerida (en la base de datos `empresa`):
    - Tipo de conexión: **MariaDB**.
    - Host: endpoint del RDS (ej. `mi-rds.mariadb.xxxxx.us-east-1.rds.amazonaws.com`).
    - Puerto: `3306`.
-   - Database: `empresa` (o la que hayas definido).
-   - Usuario/contraseña: los que configuraste al crear la instancia.
+   - Database: `database-mariadb`.
+   - Usuario/contraseña: los que configuramos al crear la instancia.
 
-   ![Conexión DBeaver a MariaDB](capturasReadme/Captura de pantalla 2026-03-16 a las 22.53.58.png)
+   ![Conexión DBeaver a MariaDB](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2022.53.58.png)
 
 2) **Crear la tabla**
-   - En DBeaver, abre un **SQL Editor** sobre la DB `empresa`.
-   - Ejecuta:
+   - En DBeaver, abrimos un **SQL Editor** sobre la DB `database-mariadb`.
+   - Ejecutamos:
      ```sql
      CREATE TABLE IF NOT EXISTS proyectos_empleados (
        email VARCHAR(255) NOT NULL,
@@ -105,35 +110,23 @@ Tabla requerida (en la base de datos `empresa`):
      );
      ```
 
-![Tabla proyectos_empleados creada](capturasReadme/Captura de pantalla 2026-03-16 a las 23.02.05.png)
+![Tabla proyectos_empleados creada](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.02.05.png)
 
 3) **Importar el CSV generado**
    - Botón derecho sobre la tabla `proyectos_empleados` → **Import Data**.
-   - Fuente: **CSV** → selecciona el archivo `data/rds/proyectos_empleados.csv` de este repositorio.
-   - Mapea columnas:
+   - Fuente: **CSV** → seleccionamos el archivo `data/rds/proyectos_empleados.csv` de este repositorio.
+   - Mapeamos columnas:
      - `email` → `email`
      - `proyecto` → `proyecto`
      - `horas_trabajadas` → `horas_trabajadas`
      - `rol` → `rol`
    - Siguiente → Finish. DBeaver insertará todas las filas.
-   - Comprueba con:
+   - Comprobamos con:
      ```sql
-     SELECT * FROM proyectos_empleados LIMIT 10;
+     SELECT * FROM databasemariadb.proyectos_empleados LIMIT 10;
      ```
 
-![Import Data CSV](capturasReadme/Captura de pantalla 2026-03-16 a las 23.04.31.png)
-
-![Datos cargados en proyectos_empleados](capturasReadme/Captura de pantalla 2026-03-16 a las 23.05.47.png)
-
-### 4C) Conexión JDBC + Crawler en Glue
-1) Glue → **Connections** → JDBC (RDS)
-2) (Si está en VPC) configura VPC/Subnet/SG para que Glue llegue al RDS
-3) Crawler usando esa conexión, output a `empresa_db`
-4) Ejecuta y verifica la tabla (ej. `proyectos_empleados`) con columnas correctas
-
-Para el PDF:
-- Captura de la Connection JDBC.
-- Captura del crawler + tabla catalogada.
+![Datos cargados en proyectos_empleados](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%201.28.31.png)
 
 ---
 
