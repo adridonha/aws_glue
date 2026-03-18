@@ -6,7 +6,6 @@
 
 ```
 aws_glue/
-├── .env_plantilla                 # Plantilla .env
 ├── .gitignore
 ├── data/
 │   ├── generar_datos_sinteticos.py # Genera datos: S3 CSV, RDS CSV/SQL, MongoDB JSON
@@ -18,24 +17,6 @@ aws_glue/
 ├── athena/ddl_empleados_final.sql  # DDL para tabla final en Athena
 └── docs/INFORME_ETL_EMPLEADOS.md   # Informe base para exportar a PDF
 ```
-
----
-
-## Antes de empezar (credenciales y región)
-
-- **AWS**: Glue no usa `.env`. El Job corre con **IAM Role**.  
-  El `.env` te sirve solo para cosas locales (AWS CLI, scripts, etc.).
-
-1) Copia plantilla y rellena:
-
-```bash
-cp .env_plantilla .env
-```
-
-2) Edita `.env` y completa:
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `AWS_DEFAULT_REGION` (ej. `eu-west-1`)
 
 ---
 
@@ -55,14 +36,14 @@ Se generan 3 fuentes con la misma clave `email` para el join:
 
 ## Paso 1 (AWS). Crear bucket y estructura en S3
 
-1) En S3 crea un bucket (ejemplo): `empresa-analitica-datos-<tu_nombre>`
+1) En S3 creamos un bucket: `empresa-analitica-datos`
 2) Estructura de carpetas:
 - `raw/empleados/`
 - `analitica/empleados_final/`
-3) Sube `data/s3/empleados.csv` a:
-- `s3://TU_BUCKET/raw/empleados/empleados.csv`
+3) Subimos `data/s3/empleados.csv` a:
+- `s3://empresa-analitica-datos/raw/empleados/empleados.csv`
 
-![Bucket S3 y CSV empleados](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2011.59.34.png)
+![Bucket S3 y CSV empleados](/Users/adrian/Desktop/IABD/aws_glue/capturasReadme/Captura de pantalla 2026-03-18 a las 1.03.11.png)
 
 ---
 
@@ -71,7 +52,7 @@ Se generan 3 fuentes con la misma clave `email` para el join:
 Glue → **Data Catalog → Databases → Add database**  
 - Nombre: **`empresa_db`**
 
-![Base de datos empresa_db en Glue](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.00.58.png)
+![Base de datos empresa_db en Glue](capturasReadme/Captura de pantalla 2026-03-16 a las 12.00.58.png)
 
 ---
 
@@ -85,9 +66,9 @@ Glue:
 5) Verifica la tabla (ej. `empleados`) con columnas:
 - `nombre`, `email`, `departamento`, `puesto`, `sueldo`, `antigüedad`
 
-![Crawler S3](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.15.09.png)
+![Crawler S3](capturasReadme/Captura de pantalla 2026-03-16 a las 12.15.09.png)
 
-![Tabla empleados en Data Catalog](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2012.17.21.png)
+![Tabla empleados en Data Catalog](capturasReadme/Captura de pantalla 2026-03-16 a las 12.17.21.png)
 
 ---
 
@@ -110,7 +91,7 @@ Tabla requerida (en la base de datos `empresa`):
    - Database: `empresa` (o la que hayas definido).
    - Usuario/contraseña: los que configuraste al crear la instancia.
 
-   ![Conexión DBeaver a MariaDB](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2022.53.58.png)
+   ![Conexión DBeaver a MariaDB](capturasReadme/Captura de pantalla 2026-03-16 a las 22.53.58.png)
 
 2) **Crear la tabla**
    - En DBeaver, abre un **SQL Editor** sobre la DB `empresa`.
@@ -124,7 +105,7 @@ Tabla requerida (en la base de datos `empresa`):
      );
      ```
 
-![Tabla proyectos_empleados creada](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.02.05.png)
+![Tabla proyectos_empleados creada](capturasReadme/Captura de pantalla 2026-03-16 a las 23.02.05.png)
 
 3) **Importar el CSV generado**
    - Botón derecho sobre la tabla `proyectos_empleados` → **Import Data**.
@@ -140,9 +121,9 @@ Tabla requerida (en la base de datos `empresa`):
      SELECT * FROM proyectos_empleados LIMIT 10;
      ```
 
-![Import Data CSV](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.04.31.png)
+![Import Data CSV](capturasReadme/Captura de pantalla 2026-03-16 a las 23.04.31.png)
 
-![Datos cargados en proyectos_empleados](capturasReadme/Captura%20de%20pantalla%202026-03-16%20a%20las%2023.05.47.png)
+![Datos cargados en proyectos_empleados](capturasReadme/Captura de pantalla 2026-03-16 a las 23.05.47.png)
 
 ### 4C) Conexión JDBC + Crawler en Glue
 1) Glue → **Connections** → JDBC (RDS)
