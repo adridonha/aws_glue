@@ -150,38 +150,33 @@ Campos esperados:
 2) Usa el connection string de Atlas
 3) Asegura red (allowlist IP / peering, según tu caso)
 
-Para el PDF:
-- Captura de la conexión MongoDB en Glue.
-- (Opcional) Si haces crawler, captura del crawler + tabla.
-
 ---
 
-## Paso 6 (AWS). Crear el ETL Job en Glue (Spark)
+## Paso 6 (AWS). Crear el ETL Job en Glue
 
 1) Glue Studio → **Jobs → Create job**
-2) Tipo: Spark (script)
-3) Pega el script: `glue/etl_empleados_analitico.py`
-4) IAM Role con permisos:
-   - S3 (leer `raw/`, escribir `analitica/`)
-   - Glue Data Catalog
-   - RDS (red VPC/SG si aplica)
-   - MongoDB (vía la conexión)
-5) **Job parameters**:
 
-- `--s3_database` = `empresa_db`
-- `--s3_table_empleados` = `empleados`
-- `--rds_database` = `empresa_db`
-- `--rds_table` = `proyectos_empleados`
-- `--mongodb_connection` = `NOMBRE_CONEXION_MONGO`
-- `--mongodb_database` = `empresa`
-- `--mongodb_collection` = `evaluaciones`
-- `--output_path` = `s3://TU_BUCKET/analitica/empleados_final/`
+# Proceso de configuración de red para AWS Glue con JDBC
 
-6) Ejecuta el Job y valida estado **Succeeded**
+### Creamos etl-empleados
 
-Para el PDF:
-- Captura del Job (script + parámetros).
-- Captura del run “Succeeded”.
+![Creación de Job ETL](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.13.15.png>)
+
+Para que AWS Glue funcione dentro de una VPC personalizada necesita comunicarse con las APIs públicas (como S3). Como nuestra subred es privada, creamos un NAT Gateway en una subred pública para servir de puente.
+
+![Creación de NAT Gateway](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.25.58.png>)
+
+Ahora le decimos a la subred de Glue que use el NAT:
+
+![Actualización de Tabla de Rutas](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.28.43.png>)
+
+Y modificamos el grupo de seguridad para que permita todo el tráfico TCP. Esto soluciona el error `InvalidInputException` al permitir que los componentes de Glue se comuniquen entre sí:
+
+![Configuración de Regla de Security Group](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.41.05.png>)
+
+Finalmente probamos la conexión:
+
+![Test de Conexión Exitoso](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.42.41.png>)
 
 ---
 
@@ -238,8 +233,3 @@ Para el PDF:
 
 ---
 
-## PDF (memoria)
-
-Usa `docs/INFORME_ETL_EMPLEADOS.md`:
-- Inserta las capturas en los placeholders
-- Exporta a PDF (VS Code “Markdown PDF” o copiar a Word/LibreOffice)
