@@ -156,7 +156,7 @@ Campos esperados:
 
 1) Glue Studio → **Jobs → Create job**
 
-# Proceso de configuración de red para AWS Glue con JDBC
+Proceso de configuración de red para AWS Glue con JDBC
 
 ### Creamos etl-empleados
 
@@ -178,28 +178,30 @@ Finalmente probamos la conexión:
 
 ![Test de Conexión Exitoso](<capturasReadme/Captura de pantalla 2026-03-18 a las 2.42.41.png>)
 
+### Configuración de Conexión con MongoDB Atlas
+
+Ahora configuramos la conexión con MongoDB, pero primero debemos autorizar las IPs públicas de nuestro **NAT Gateway** en el panel de MongoDB Atlas para permitir el tráfico entrante.
+
+<img src="capturasReadme/Captura de pantalla 2026-03-18 a las 3.06.08.png" alt="Whitelist de IP en MongoDB Atlas" width="100%">
+
+#### Configuración de la conexión en AWS Glue
+
+Procedemos a crear la conexión de tipo MongoDB en la consola de AWS Glue, introduciendo la cadena de conexión y las credenciales correspondientes:
+
+<img src="capturasReadme/Captura de pantalla 2026-03-18 a las 3.52.51.png" alt="Configuración de conexión parte 1" width="100%">
+
+<img src="capturasReadme/Captura de pantalla 2026-03-18 a las 3.53.42.png" alt="Configuración de conexión parte 2" width="100%">
+
+### Error detectado
+
+Actualmente, el proceso se encuentra detenido debido a un fallo en el test de conexión. Este error impide que el Job de Glue pueda validar el esquema de los datos y continuar con la práctica:
+
+<img src="capturasReadme/Captura de pantalla 2026-03-18 a las 3.55.00.png" alt="Fallo en Test de Conexión" width="100%">
+
+
 ---
 
-## Paso 7–9 (ETL). Qué hace el script (para justificar en la memoria)
-
-En `glue/etl_empleados_analitico.py`:
-- **Limpieza**:
-  - `dropDuplicates([\"email\"])`
-  - elimina `email` nulo/vacío
-  - outliers: sueldo 15k–120k; antigüedad 0–30; horas 0–250
-- **Filtro**: sueldo > 0
-- **Join**: INNER de las 3 fuentes por `email`
-- **Nuevas columnas**:
-  - `nivel_rendimiento` (= `rendimiento`)
-  - `categoria_sueldo` (Bajo/Medio/Alto)
-- **Salida**: Parquet en S3 particionado por `departamento`
-
-Para el PDF:
-- Captura del fragmento del código con limpieza+filtro+join+columnas derivadas.
-
----
-
-## Paso 10 (AWS). Athena: tabla final + particiones + consultas
+## Paso 7 (AWS). Athena: tabla final + particiones + consultas
 
 ### Opción A (directo con DDL)
 1) Athena → Query editor
@@ -215,21 +217,6 @@ MSCK REPAIR TABLE empresa_db.empleados_final;
 2) Output a `empresa_db`
 3) Ejecuta y consulta en Athena
 
-Para el PDF:
-- Captura de la tabla y de 2–4 consultas con resultados.
-
----
-
-## Checklist de capturas (rúbrica)
-
-- S3 bucket + `raw/empleados/empleados.csv`
-- Glue Database `empresa_db`
-- Crawler S3 + tabla `empleados` con columnas
-- Connection JDBC RDS + crawler + tabla `proyectos_empleados`
-- Connection MongoDB (y crawler/tabla si aplica)
-- Glue Job (script+parámetros) + Run “Succeeded”
-- S3 salida `analitica/empleados_final/` con carpetas `departamento=...`
-- Athena: tabla + `MSCK REPAIR` + resultados de consultas
 
 ---
 
