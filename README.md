@@ -81,7 +81,7 @@ Glue:
 - Motor recomendado: **MariaDB** en RDS.
 - Debemos poder conectarnos desde nuestra máquina con **DBeaver** (o cliente SQL equivalente).
 
-![Creación RDS](capturasReadme/Captura de pantalla 2026-03-18 a las 1.17.56.png)
+![Creación RDS](capturasReadme/Captura%20de%20pantalla%202026-03-18%20a%20las%201.17.56.png)
 
 ### 4B) Crear tabla y cargar datos con DBeaver
 Tabla requerida (en la base de datos `database-mariadb`):
